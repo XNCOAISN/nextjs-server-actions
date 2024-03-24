@@ -1,6 +1,20 @@
+import {
+  Anchor,
+  AppShell,
+  AppShellHeader,
+  AppShellMain,
+  ColorSchemeScript,
+  Container,
+  Group,
+  MantineProvider,
+} from "@mantine/core";
+import "./globals.css";
+import "@mantine/core/styles.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import { HomeIcon } from "lucide-react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +30,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body className={inter.className}>
+        <MantineProvider>
+          <AppShell header={{ height: 60 }} padding="md">
+            <AppShellHeader>
+              <Container h="100%">
+                <Group h="100%">
+                  <Anchor component={Link} href="/">
+                    Home
+                  </Anchor>
+                </Group>
+              </Container>
+            </AppShellHeader>
+            <AppShellMain px={0}>{children}</AppShellMain>
+          </AppShell>
+        </MantineProvider>
+      </body>
     </html>
   );
 }
