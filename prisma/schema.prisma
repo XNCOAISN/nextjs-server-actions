@@ -1,0 +1,18 @@
+generator client {
+  provider  = "prisma-kysely"
+  output    = "../src/db"
+  fileName  = "types.ts"
+  camelCase = true
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Message {
+  id      Int    @id @default(autoincrement())
+  message String
+
+  @@map("messages")
+}
